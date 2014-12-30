@@ -87,6 +87,6 @@ for i in range(len(colors)):
     
 #    
 try:
-    prettyPicture(clf, X_train, y_train)
+    prettyPicture(clf, X_train, y_train, X_test, y_test)
 except NameError:
     pass

@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pylab as pl
 
-def prettyPicture(clf, X_test, y_test):
+def prettyPicture(clf, X_train, y_train, X_test, y_test ):
     x_min = -1.0; x_max = 1.0
     y_min = -1.0; y_max = 1.0
     
@@ -21,16 +21,25 @@ def prettyPicture(clf, X_test, y_test):
 
     plt.pcolormesh(xx, yy, Z, cmap=pl.cm.seismic)
 
-    # Plot also the test points
-    grade_sig = [X_test[ii][0] for ii in range(0, len(X_test)) if y_test[ii]==0]
-    bumpy_sig = [X_test[ii][1] for ii in range(0, len(X_test)) if y_test[ii]==0]
-    grade_bkg = [X_test[ii][0] for ii in range(0, len(X_test)) if y_test[ii]==1]
-    bumpy_bkg = [X_test[ii][1] for ii in range(0, len(X_test)) if y_test[ii]==1]
+    # Plot the train points 
+    param1_train_no = [X_train[ii][0] for ii in range(0, len(X_train)) if y_train[ii]==0]
+    param2_train_no = [X_train[ii][1] for ii in range(0, len(X_train)) if y_train[ii]==0]
+    param1_train_yes = [X_train[ii][0] for ii in range(0, len(X_train)) if y_train[ii]==1]
+    param2_train_yes = [X_train[ii][1] for ii in range(0, len(X_train)) if y_train[ii]==1]
+    
+    plt.scatter(param1_train_no, param2_train_no, color = "y", label="0 - train")
+    plt.scatter(param1_train_yes, param2_train_yes, color = "r", label="1 - train")
+    
+    # Plot the test points 
+    param1_test_no = [X_test[ii][0] for ii in range(0, len(X_test)) if y_test[ii]==0]
+    param2_test_no = [X_test[ii][1] for ii in range(0, len(X_test)) if y_test[ii]==0]
+    param1_test_yes = [X_test[ii][0] for ii in range(0, len(X_test)) if y_test[ii]==1]
+    param2_test_yes = [X_test[ii][1] for ii in range(0, len(X_test)) if y_test[ii]==1]
 
 
-    plt.scatter(grade_sig, bumpy_sig, color = "y", label="0")
-    plt.scatter(grade_bkg, bumpy_bkg, color = "r", label="1")
-    plt.legend()
+    plt.scatter(param1_test_no, param2_test_no, color = "y", marker = "x", label="0 - test")
+    plt.scatter(param1_test_yes, param2_test_yes, color = "r", marker = "x", label="1 - test")
+    plt.legend(loc=4)
     plt.xlabel("x")
     plt.ylabel("y")
 
