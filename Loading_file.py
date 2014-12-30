@@ -55,7 +55,7 @@ X_test = scaler.transform(X_test)
 
 #######################################
 '''
-SCV algorithm
+SVM algorithm
 '''
 t0 = time()
 clf = SVC(C = 100000.0, kernel='rbf')
